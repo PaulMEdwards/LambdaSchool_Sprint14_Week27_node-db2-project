@@ -1,0 +1,1335 @@
+{
+	"info": {
+		"_postman_id": "8d1e2fe4-fecd-4139-b250-c11e755ba914",
+		"name": "LS_Sp14_Wk27_node-db2-project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST",
+			"item": [
+				{
+					"name": "POST /api/vehicles (missing required data)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8b6bd3b5-3913-4ebd-937c-93f56dae29a5",
+								"exec": [
+									"var res = pm.response.json();",
+									"",
+									"pm.test('Failure', () => {",
+									"    pm.response.to.have.status(400);",
+									"    pm.expect(res.success).to.equal(false);",
+									"});",
+									"",
+									"pm.test('Data Size', () => {",
+									"    pm.expect(res.vehicle).to.be.undefined;",
+									"});",
+									"",
+									"pm.test('Data Value(s)', () => {",
+									"    pm.expect(res.errorMessage).to.equal(\"Missing required data!\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/vehicles",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"vehicles"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST /api/vehicles (missing required data)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/vehicles",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"vehicles"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "57"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"39-hT6ZPu8MoSXou9sGg88X+x4hkRs\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 31 Jan 2020 07:12:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"errorMessage\": \"Missing required data!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "POST /api/vehicles (valid)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "84d20fc1-f559-4506-8cda-8c9c242e8369",
+								"exec": [
+									"var res = pm.response.json();",
+									"",
+									"pm.test('Success', () => {",
+									"    pm.response.to.have.status(201);",
+									"    pm.expect(res.success).to.equal(true);",
+									"});",
+									"",
+									"pm.test('Data Value(s)', () => {",
+									"    pm.expect(res.vehicle.ID).to.be.at.least(5);",
+									"});",
+									"",
+									"//Store generated account ID for reuse in subsequent tests",
+									"var vid = res.vehicle.ID;",
+									"pm.collectionVariables.set(\"VehicleID\", vid);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"VIN\": \"TBD\",\n\t\"Year\": 2021,\n\t\"Make\": \"Tesla\",\n\t\"Model\": \"CyberTruck\",\n\t\"Trim\": \"Tri-Motor AWD with Full Self-Driving\",\n\t\"Color\": \"Brushed Metal / Black\",\n\t\"Mileage\": 1,\n\t\"VehicleType\": \"Truck\",\n\t\"EngineType\": \"Electric\",\n\t\"EngineDisplacementCCs\": 0,\n\t\"FuelType\": \"Electricity\",\n\t\"TransmissionType\": \"Automatic\",\n\t\"TransmissionForwardGears\": 1,\n\t\"TitleStatus\": \"Clean\",\n\t\"Sold\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/vehicles",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"vehicles"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST /api/vehicles (valid)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"VIN\": \"TBD\",\n\t\"Year\": 2021,\n\t\"Make\": \"Tesla\",\n\t\"Model\": \"CyberTruck\",\n\t\"Trim\": \"Tri-Motor AWD with Full Self-Driving\",\n\t\"Color\": \"Brushed Metal / Black\",\n\t\"Mileage\": 1,\n\t\"VehicleType\": \"Truck\",\n\t\"EngineType\": \"Electric\",\n\t\"EngineDisplacementCCs\": 0,\n\t\"FuelType\": \"Electricity\",\n\t\"TransmissionType\": \"Automatic\",\n\t\"TransmissionForwardGears\": 1,\n\t\"TitleStatus\": \"Clean\",\n\t\"Sold\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/vehicles",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"vehicles"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "373"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"175-tMJeKbjq97jZkYYdfj5+N607pMA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 31 Jan 2020 07:31:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"vehicle\": {\n        \"ID\": 5,\n        \"VIN\": \"TBD\",\n        \"Year\": 2021,\n        \"Make\": \"Tesla\",\n        \"Model\": \"CyberTruck\",\n        \"Trim\": \"Tri-Motor AWD with Full Self-Driving\",\n        \"Color\": \"Brushed Metal / Black\",\n        \"Mileage\": 1,\n        \"VehicleType\": \"Truck\",\n        \"EngineType\": \"Electric\",\n        \"EngineDisplacementCCs\": 0,\n        \"FuelType\": \"Electricity\",\n        \"TransmissionType\": \"Automatic\",\n        \"TransmissionForwardGears\": 1,\n        \"TitleStatus\": \"Clean\",\n        \"Sold\": 0\n    }\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "GET",
+			"item": [
+				{
+					"name": "GET /api/vehicles",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f0f3c8ca-fcc2-4eb5-a6c9-b6e40e6eba58",
+								"exec": [
+									"var res = pm.response.json();",
+									"",
+									"pm.test('Success', () => {",
+									"    pm.response.to.have.status(200);",
+									"    pm.expect(res.success).to.equal(true);",
+									"});",
+									"",
+									"pm.test('Data Size', () => {",
+									"    pm.expect(res.vehicles.length).to.be.at.least(4);",
+									"});",
+									"",
+									"pm.test('Data Value(s)', () => {",
+									"    pm.expect(res.vehicles[1].Model).to.equal(\"Corvette\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/vehicles",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"vehicles"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET /api/vehicles",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/vehicles",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"vehicles"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1664"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"680-pc6bbGZ3b0dHFKqVyWo6l+2T5Fw\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 31 Jan 2020 07:31:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"vehicles\": [\n        {\n            \"ID\": 1,\n            \"VIN\": \"3C8FY78G74T301353\",\n            \"Year\": 2004,\n            \"Make\": \"Chrysler\",\n            \"Model\": \"PT Cruiser\",\n            \"Trim\": \"GT\",\n            \"Color\": \"Deep Plum\",\n            \"Mileage\": 136439,\n            \"VehicleType\": \"Wagon\",\n            \"EngineType\": \"I4\",\n            \"EngineDisplacementCCs\": 2400,\n            \"FuelType\": \"Gasoline\",\n            \"TransmissionType\": \"Automatic\",\n            \"TransmissionForwardGears\": 4,\n            \"TitleStatus\": \"Clean\",\n            \"Sold\": 0\n        },\n        {\n            \"ID\": 2,\n            \"VIN\": \"1G1YG2D79G5106521\",\n            \"Year\": 2016,\n            \"Make\": \"Chevrolet\",\n            \"Model\": \"Corvette\",\n            \"Trim\": \"Stingray Z51 1LT\",\n            \"Color\": \"Laguna Blue\",\n            \"Mileage\": 61993,\n            \"VehicleType\": \"Coupe\",\n            \"EngineType\": \"V8\",\n            \"EngineDisplacementCCs\": 6200,\n            \"FuelType\": \"Gasoline\",\n            \"TransmissionType\": \"Manual\",\n            \"TransmissionForwardGears\": 7,\n            \"TitleStatus\": \"Clean\",\n            \"Sold\": 0\n        },\n        {\n            \"ID\": 3,\n            \"VIN\": \"4MZHL04D993B01815\",\n            \"Year\": 2009,\n            \"Make\": \"Buell\",\n            \"Model\": \"1125R\",\n            \"Trim\": \"\",\n            \"Color\": \"Black / Red\",\n            \"Mileage\": 22472,\n            \"VehicleType\": \"Superbike\",\n            \"EngineType\": \"V2\",\n            \"EngineDisplacementCCs\": 1125,\n            \"FuelType\": \"Gasoline\",\n            \"TransmissionType\": \"Manual\",\n            \"TransmissionForwardGears\": 6,\n            \"TitleStatus\": \"Clean\",\n            \"Sold\": 0\n        },\n        {\n            \"ID\": 4,\n            \"VIN\": \"JYARP29Y9JA000125\",\n            \"Year\": 2018,\n            \"Make\": \"Yamaha\",\n            \"Model\": \"FJR1300A\",\n            \"Trim\": \"JCL\",\n            \"Color\": \"Matte Phantom Blue / Black\",\n            \"Mileage\": 6892,\n            \"VehicleType\": \"Sport-Touring\",\n            \"EngineType\": \"I4\",\n            \"EngineDisplacementCCs\": 1298,\n            \"FuelType\": \"Gasoline\",\n            \"TransmissionType\": \"Manual\",\n            \"TransmissionForwardGears\": 6,\n            \"TitleStatus\": \"Clean\",\n            \"Sold\": 0\n        },\n        {\n            \"ID\": 5,\n            \"VIN\": \"TBD\",\n            \"Year\": 2021,\n            \"Make\": \"Tesla\",\n            \"Model\": \"CyberTruck\",\n            \"Trim\": \"Tri-Motor AWD with Full Self-Driving\",\n            \"Color\": \"Brushed Metal / Black\",\n            \"Mileage\": 1,\n            \"VehicleType\": \"Truck\",\n            \"EngineType\": \"Electric\",\n            \"EngineDisplacementCCs\": 0,\n            \"FuelType\": \"Electricity\",\n            \"TransmissionType\": \"Automatic\",\n            \"TransmissionForwardGears\": 1,\n            \"TitleStatus\": \"Clean\",\n            \"Sold\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "GET /api/vehicles/:id (not found)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "133dafd8-cfda-4da0-9b8a-3190d8c83402",
+								"exec": [
+									"var res = pm.response.json();",
+									"",
+									"pm.test('Failure', () => {",
+									"    pm.response.to.have.status(404);",
+									"    pm.expect(res.success).to.equal(false);",
+									"});",
+									"",
+									"pm.test('Data Size', () => {",
+									"    pm.expect(res.vehicle).to.be.undefined;",
+									"});",
+									"",
+									"pm.test('Error Message', () => {",
+									"    pm.expect(res.errorMessage).to.equal(\"The vehicle with the specified ID does not exist.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/vehicles/999",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"vehicles",
+								"999"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET /api/vehicles/:id (not found)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/vehicles/999",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"vehicles",
+										"999"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "84"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"54-2lpIfp+ZnxWy+RYSO6zmVGhcuE8\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 31 Jan 2020 07:32:29 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"errorMessage\": \"The vehicle with the specified ID does not exist.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "GET /api/vehicles/:id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a935735f-f00c-49cb-b097-afdfcc2f6613",
+								"exec": [
+									"var res = pm.response.json();",
+									"",
+									"pm.test('Success', () => {",
+									"    pm.response.to.have.status(200);",
+									"    pm.expect(res.success).to.equal(true);",
+									"});",
+									"",
+									"pm.test('Data Value(s)', () => {",
+									"    pm.expect(res.vehicle.Model).to.equal(\"CyberTruck\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/vehicles/{{VehicleID}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"vehicles",
+								"{{VehicleID}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET /api/vehicles/:id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/vehicles/{{VehicleID}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"vehicles",
+										"{{VehicleID}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "373"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"175-tMJeKbjq97jZkYYdfj5+N607pMA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 31 Jan 2020 07:32:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"vehicle\": {\n        \"ID\": 5,\n        \"VIN\": \"TBD\",\n        \"Year\": 2021,\n        \"Make\": \"Tesla\",\n        \"Model\": \"CyberTruck\",\n        \"Trim\": \"Tri-Motor AWD with Full Self-Driving\",\n        \"Color\": \"Brushed Metal / Black\",\n        \"Mileage\": 1,\n        \"VehicleType\": \"Truck\",\n        \"EngineType\": \"Electric\",\n        \"EngineDisplacementCCs\": 0,\n        \"FuelType\": \"Electricity\",\n        \"TransmissionType\": \"Automatic\",\n        \"TransmissionForwardGears\": 1,\n        \"TitleStatus\": \"Clean\",\n        \"Sold\": 0\n    }\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "PUT",
+			"item": [
+				{
+					"name": "PUT /api/vehicles/:id (not found)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0b849a9d-5d2f-4e2e-8525-e98fabc2ebd1",
+								"exec": [
+									"var res = pm.response.json();",
+									"",
+									"pm.test('Status: 404 Not Found', () => {",
+									"    pm.response.to.have.status(404);",
+									"    pm.expect(pm.response.status).to.equal(\"Not Found\");",
+									"});",
+									"",
+									"pm.test(\"Does not exist\", () => {",
+									"    pm.expect(pm.response.text()).to.include(\"The vehicle with the specified ID does not exist.\");",
+									"});",
+									"",
+									"pm.test('Success=false', () => {",
+									"    pm.expect(res.success).to.be.false;",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"VIN\": \"TBD\",\n\t\"Year\": 2022,\n\t\"Make\": \"Tesla\",\n\t\"Model\": \"Roadster\",\n\t\"Trim\": \"AWD\",\n\t\"Color\": \"Red\",\n\t\"Mileage\": 1,\n\t\"VehicleType\": \"Coupe\",\n\t\"EngineType\": \"Electric\",\n\t\"EngineDisplacementCCs\": 0,\n\t\"FuelType\": \"Electricity\",\n\t\"TransmissionType\": \"Automatic\",\n\t\"TransmissionForwardGears\": 1,\n\t\"TitleStatus\": \"Clean\",\n\t\"Sold\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/vehicles/999",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"vehicles",
+								"999"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "PUT /api/vehicles/:id (not found)",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"VIN\": \"TBD\",\n\t\"Year\": 2022,\n\t\"Make\": \"Tesla\",\n\t\"Model\": \"Roadster\",\n\t\"Trim\": \"AWD\",\n\t\"Color\": \"Red\",\n\t\"Mileage\": 1,\n\t\"VehicleType\": \"Coupe\",\n\t\"EngineType\": \"Electric\",\n\t\"EngineDisplacementCCs\": 0,\n\t\"FuelType\": \"Electricity\",\n\t\"TransmissionType\": \"Automatic\",\n\t\"TransmissionForwardGears\": 1,\n\t\"TitleStatus\": \"Clean\",\n\t\"Sold\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/vehicles/999",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"vehicles",
+										"999"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "84"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"54-2lpIfp+ZnxWy+RYSO6zmVGhcuE8\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 31 Jan 2020 07:33:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"errorMessage\": \"The vehicle with the specified ID does not exist.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "PUT /api/vehicles/:id (missing required data)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "afa213a4-8aad-44b4-baa1-50a06be4fe81",
+								"exec": [
+									"var res = pm.response.json();",
+									"",
+									"pm.test('Status: 400 Bad Request', () => {",
+									"    pm.response.to.have.status(400);",
+									"    pm.expect(pm.response.status).to.equal(\"Bad Request\");",
+									"});",
+									"",
+									"pm.test(\"Does not exist\", () => {",
+									"    pm.expect(pm.response.text()).to.include(\"Please provide required data for the vehicle.\");",
+									"});",
+									"",
+									"pm.test('Success=false', () => {",
+									"    pm.expect(res.success).to.be.false;",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/vehicles/{{VehicleID}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"vehicles",
+								"{{VehicleID}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "PUT /api/vehicles/:id (missing required data)",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/vehicles/{{VehicleID}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"vehicles",
+										"{{VehicleID}}"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "80"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"50-g0I6gwouUB0Ha3IJ/SyzRiX3DZQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 31 Jan 2020 07:33:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"errorMessage\": \"Please provide required data for the vehicle.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "PUT /api/vehicles/:id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ba7c0b18-8c9b-4035-a568-56f7abaf3129",
+								"exec": [
+									"var res = pm.response.json();",
+									"",
+									"pm.test('Success', () => {",
+									"    pm.response.to.have.status(200);",
+									"    pm.expect(res.success).to.equal(true);",
+									"});",
+									"",
+									"pm.test('Data Value(s)', () => {",
+									"    pm.expect(res.vehicleIdUpdated).to.equal(pm.collectionVariables.get('VehicleID'));",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"VIN\": \"TBD\",\n\t\"Year\": 2022,\n\t\"Make\": \"Tesla\",\n\t\"Model\": \"Roadster\",\n\t\"Trim\": \"AWD\",\n\t\"Color\": \"Red\",\n\t\"Mileage\": 1,\n\t\"VehicleType\": \"Coupe\",\n\t\"EngineType\": \"Electric\",\n\t\"EngineDisplacementCCs\": 0,\n\t\"FuelType\": \"Electricity\",\n\t\"TransmissionType\": \"Automatic\",\n\t\"TransmissionForwardGears\": 1,\n\t\"TitleStatus\": \"Clean\",\n\t\"Sold\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/vehicles/{{VehicleID}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"vehicles",
+								"{{VehicleID}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "PUT /api/vehicles/:id",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"VIN\": \"TBD\",\n\t\"Year\": 2022,\n\t\"Make\": \"Tesla\",\n\t\"Model\": \"Roadster\",\n\t\"Trim\": \"AWD\",\n\t\"Color\": \"Red\",\n\t\"Mileage\": 1,\n\t\"VehicleType\": \"Coupe\",\n\t\"EngineType\": \"Electric\",\n\t\"EngineDisplacementCCs\": 0,\n\t\"FuelType\": \"Electricity\",\n\t\"TransmissionType\": \"Automatic\",\n\t\"TransmissionForwardGears\": 1,\n\t\"TitleStatus\": \"Clean\",\n\t\"Sold\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/vehicles/{{VehicleID}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"vehicles",
+										"{{VehicleID}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "37"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"25-nT6NozE6I5QFETPnGvGGPXNADu8\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 31 Jan 2020 07:33:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"vehicleIdUpdated\": 5\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "DELETE",
+			"item": [
+				{
+					"name": "DELETE /api/vehicles/:id (not found)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a76ad4c8-5756-43a8-a71d-98c639ad7158",
+								"exec": [
+									"var res = pm.response.json();",
+									"",
+									"pm.test('Status: 404 Not Found', () => {",
+									"    pm.response.to.have.status(404);",
+									"    pm.expect(pm.response.status).to.equal(\"Not Found\");",
+									"});",
+									"",
+									"pm.test(\"Does not exist\", () => {",
+									"    pm.expect(pm.response.text()).to.include(\"The vehicle with the specified ID does not exist.\");",
+									"});",
+									"",
+									"pm.test('Success=false', () => {",
+									"    pm.expect(res.success).to.be.false;",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/vehicles/999",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"vehicles",
+								"999"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "DELETE /api/vehicles/:id (not found)",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/vehicles/999",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"vehicles",
+										"999"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "84"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"54-2lpIfp+ZnxWy+RYSO6zmVGhcuE8\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 31 Jan 2020 07:34:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"errorMessage\": \"The vehicle with the specified ID does not exist.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "DELETE /api/vehicles/:id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "9412206e-ff39-4881-a557-4eb1e3307710",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "ff5472e0-ad9e-406b-84d4-0b1cd9ac8bec",
+								"exec": [
+									"var res = pm.response.json();",
+									"",
+									"pm.test('Success', () => {",
+									"    pm.response.to.have.status(200);",
+									"    pm.expect(res.success).to.equal(true);",
+									"});",
+									"",
+									"pm.test('Data Value(s)', () => {",
+									"    pm.expect(res.vehicleIdRemoved).to.equal(pm.collectionVariables.get('VehicleID'));",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/vehicles/{{VehicleID}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"vehicles",
+								"{{VehicleID}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "DELETE /api/vehicles/:id",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/vehicles/{{VehicleID}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"vehicles",
+										"{{VehicleID}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "37"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"25-VaCWz3KFysYuolxMi+kiyfuVfXU\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 31 Jan 2020 07:34:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"vehicleIdRemoved\": 5\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "81005885-9980-4e6e-b9bf-0043d8f3b03c",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "d4f0b23e-bbbf-4e4e-9654-506bc8e3d5e8",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "24b04b37-de8b-41a3-a81c-e119474619df",
+			"key": "VehicleID",
+			"value": 5,
+			"type": "number"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
