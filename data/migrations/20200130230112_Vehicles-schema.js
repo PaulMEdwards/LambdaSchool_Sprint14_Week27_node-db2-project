@@ -13,7 +13,11 @@ exports.up = function(knex) {
     tbl.string('Trim');
     tbl.string('Color');
     tbl.integer('Mileage');
-    tbl.enum('VehicleType', ['Sedan','Coupe','Convertible','Wagon','Hatchback','SUV','Minivan','Truck','Van','Standard','Cruiser','Sportbike','Superbike','Sport-Touring','Touring','Dual-Sport','Scooter','Trike']);
+    tbl.enum('VehicleType', [
+      'Sedan','Coupe','Convertible','Wagon','Hatchback',
+      'SUV','Minivan','Truck','Van',
+      'Standard','Cruiser','Sportbike','Superbike','Sport-Touring','Touring','Dual-Sport','Scooter','Trike'
+    ]);
     tbl.enum('EngineType', [
       'Single',
       'I2','I3','I4','I5','I6','I7','I8','I9','I10','I12','I14',
